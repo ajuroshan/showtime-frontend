@@ -1,0 +1,16 @@
+.scroll-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+}
+
+.scrollable-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+.scroll-item {
+    flex: 0 0 auto;
+    min-width: 250px; /* Adjust as necessary */
+}

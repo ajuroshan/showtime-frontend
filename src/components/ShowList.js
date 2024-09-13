@@ -19,7 +19,7 @@ const ShowList = () => {
         navigate(`/shows/${showId}`);
     };
     return (
-        <Container className="mt-4">
+        <Container>
             <Row>
                 {shows.map(show => (
                     <Col key={show.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
@@ -27,7 +27,7 @@ const ShowList = () => {
                             title={show.title}
                             description={show.description}
                             image={show.poster}
-                            onClick={() => handleShowClick(show.id)}  // Handle click event
+                            onClick={() => handleShowClick(show.id)}
                         />
                     </Col>
                 ))}

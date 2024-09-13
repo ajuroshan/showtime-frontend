@@ -8,7 +8,7 @@ import {Row, Col, Button,Form,InputGroup, ListGroup, Card} from 'react-bootstrap
 
 function BasicExample() {
     return (
-        <Navbar expand="lg" style={{backgroundColor: '#0A1627'}}>  {/* Dark background color */}
+        <Navbar expand="lg" style={{backgroundColor: '#0A1627'}} className={'pb-4'}>
             <Container>
                 <Navbar.Brand href="#home">
                     <img
