@@ -1,0 +1,19 @@
+.custom-placeholder::placeholder {
+    color: white; /* For modern browsers */
+}
+
+.custom-placeholder::-webkit-input-placeholder {
+    color: white; /* For Chrome, Safari, and Opera */
+}
+
+.custom-placeholder::-moz-placeholder {
+    color: white; /* For Firefox 19+ */
+}
+
+.custom-placeholder:-ms-input-placeholder {
+    color: white; /* For Internet Explorer 10-11 */
+}
+
+.custom-placeholder::-ms-input-placeholder {
+    color: white; /* For Microsoft Edge */
+}

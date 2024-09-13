@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import ShowCard from './ShowCard';
 import { useNavigate } from 'react-router-dom';
+import SearchComponent from "./SearchComponent";
 
 const ShowList = () => {
     const [shows, setShows] = useState([]);
@@ -20,6 +21,7 @@ const ShowList = () => {
     };
     return (
         <Container>
+            <SearchComponent/>
             <Row>
                 {shows.map(show => (
                     <Col key={show.id} xs={12} sm={6} md={4} lg={3} className="mb-4">

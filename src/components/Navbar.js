@@ -3,12 +3,25 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../logo.png';
-import {Row, Col, Button,Form,InputGroup, ListGroup, Card} from 'react-bootstrap';
+import {Row, Col, Button, Form, InputGroup, ListGroup, Card} from 'react-bootstrap';
+import {useContext} from "react";
+import {UserContext} from "./UserContext";
+import {Link} from "react-router-dom";
 
 
 function BasicExample() {
+
+    const {user, logout} = useContext(UserContext);
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+        } catch (error) {
+            // Handle logout error
+        }
+    };
     return (
-        <Navbar expand="lg" style={{backgroundColor: '#0A1627'}} className={'pb-4'}>
+        <Navbar expand="lg" className={'mb-4'}>
             <Container>
                 <Navbar.Brand href="/">
                     <img
@@ -32,21 +45,18 @@ function BasicExample() {
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
+                    {user ? (
+                        <div className="d-flex justify-content-center align-items-center gap-3">
+                            <span>Welcome, {user.username}</span>
+                            <button className="btn btn-sm btn-danger" onClick={handleLogout}>Logout</button>
+                        </div>
+                    ) : (
+                        <div className="d-flex justify-content-center align-items-center gap-3">
+                            <Link className="btn btn-sm btn-primary" to="/login">Login</Link>
+                            <Link className="btn btn-sm btn-success" to="/signup">Signup</Link>
+                        </div>
+                    )}
                 </Navbar.Collapse>
-                <Form inline>
-                    <Row>
-                        <Col xs="auto">
-                            <Form.Control
-                                type="text"
-                                placeholder="Search"
-                                className=" mr-sm-2"
-                            />
-                        </Col>
-                        <Col xs="auto">
-                            <Button type="submit">Submit</Button>
-                        </Col>
-                    </Row>
-                </Form>
             </Container>
         </Navbar>
     );

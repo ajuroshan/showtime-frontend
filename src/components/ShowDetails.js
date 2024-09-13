@@ -2,11 +2,14 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
 import {Container, Card, ListGroup, Row, Col} from 'react-bootstrap';
-import './ShowDetails.css'; // For custom styles
+import './ShowDetails.css';
+import Comment from "./Comment";
+import CommentForm from "./CommentForm"; // For custom styles
 
 const ShowDetails = () => {
     const {id} = useParams();  // Get the show ID from the URL
     const [show, setShow] = useState(null);
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/shows/${id}/`)
@@ -59,9 +62,11 @@ const ShowDetails = () => {
                 <Row className=" scrollable-row">
                     {show.episodes.map(episode => (
                         <Col key={episode.id} xs={12} md={4} lg={3} className="scroll-item">
-                            <Card className="h-100">
+                            <Card className="h-100" onClick={() => {
+                                setComments(episode.comments)
+                            }}>
                                 <img src={episode.image} alt={episode.title}
-                                     style={{height: '200px', objectFit: "cover"}}/>
+                                     style={{height: '150px', objectFit: "cover"}}/>
                                 <Card.Body>
                                     <Card.Title>{episode.title}</Card.Title>
                                     <Card.Text>{episode.description}</Card.Text>
@@ -71,6 +76,14 @@ const ShowDetails = () => {
                     ))}
                 </Row>
             </div>
+
+            <h4>Comments</h4>
+            {comments.map(comment => (
+                <Comment key={comment.id} comment={comment}/>
+            ))}
+            <CommentForm episodeId={comments[0]?.episode} setComments={setComments}/>
+
+
         </Container>
     );
 };
