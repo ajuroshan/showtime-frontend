@@ -10,7 +10,7 @@ function BasicExample() {
     return (
         <Navbar expand="lg" style={{backgroundColor: '#0A1627'}} className={'pb-4'}>
             <Container>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="/">
                     <img
                         src={logo}
                         alt="Logo"
@@ -22,7 +22,7 @@ function BasicExample() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#home" className="text-white">Home</Nav.Link>
+                        <Nav.Link href="/" className="text-white">Home</Nav.Link>
                         <Nav.Link href="#link" className="text-white">Link</Nav.Link>
                         <NavDropdown title={<span className="text-white">Dropdown</span>} id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

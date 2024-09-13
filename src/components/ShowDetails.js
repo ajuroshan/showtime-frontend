@@ -25,16 +25,30 @@ const ShowDetails = () => {
                     <h1>{show.title}</h1>
                     <p>{show.description}</p>
                     <h4>Cast</h4>
-                    <div>
+                    <div className="d-flex align-items-start gap-2">
                         {show.cast.map(actor => (
                             <div key={actor.id} className="mb-3">
-                                <h5>{actor.name}</h5>
-                                <p>Role: {actor.role}</p>
-                                {actor.image && <img src={actor.image} alt={actor.name}
-                                                     style={{height: '100px', objectFit: 'cover'}}/>}
+                                {actor.image && (
+                                    <img
+                                        src={actor.image}
+                                        alt={actor.name}
+                                        className={'mb-2'}
+                                        style={{
+                                            height: '100px',
+                                            width: '100px',   // Ensures the image is square
+                                            objectFit: 'cover',
+                                            borderRadius: '50%' // Makes the image circular
+                                        }}
+                                    />
+                                )}
+                                <div className={'text-center'}>
+                                    <h6>{actor.name}</h6>
+                                    <p>Role: {actor.role}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
+
 
                 </div>
             </div>
