@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+
+
 const SignupPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -9,6 +14,21 @@ const SignupPage = () => {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+
+    const getCookie = (name) => {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,8 +38,16 @@ const SignupPage = () => {
         }
         setError('');
         setIsLoading(true);
+        const csrftoken = getCookie('csrftoken');
+
         try {
-            await axios.post('http://localhost:8000/auth/signup/', { username, password });
+            await axios.post('http://localhost:8000/auth/signup/',
+                { username, password },{
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                    },
+                }
+            );
             navigate('/login'); // Redirect to login page after signup
         } catch (error) {
             if (error.response && error.response.data.error) {
