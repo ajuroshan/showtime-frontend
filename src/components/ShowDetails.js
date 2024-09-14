@@ -19,7 +19,14 @@ const ShowDetails = () => {
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/shows/${id}/`)
-            .then(response => setShow(response.data))
+            .then(response => {
+                    setShow(response.data)
+                    if (response.data.episodes.length > 0) {
+                        setComments(response.data.episodes[0].comments);
+                        setEpisodeId(response.data.episodes[0].id);
+                    }
+                }
+            )
             .catch(error => console.log(error));
     }, [id]);  // Fetch show details when the ID changes
 
@@ -44,10 +51,10 @@ const ShowDetails = () => {
     const handleCommentPosted = async () => {
         try {
             const response = await axios.get(`http://localhost:8000/api/episodes/${edpisodeId}/`
-            ,{
-                headers: {
-                    'X-CSRFToken': csrftoken,
-                },
+                , {
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                    },
                 }
             );
             setComments(response.data.comments);  // Update the comments based on the episode response
@@ -120,7 +127,6 @@ const ShowDetails = () => {
                 <Comment key={comment.id} comment={comment}/>
             ))}
             <CommentForm episodeId={edpisodeId} onCommentPosted={handleCommentPosted}/>
-
 
         </Container>
     );
