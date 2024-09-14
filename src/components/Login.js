@@ -10,18 +10,17 @@ const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await login(username, password);
-            navigate('/'); // Redirect to a protected route after login
-        } catch (error) {
-            // Error handling is managed by context
+        const success = await login(username, password); // Capture the success status
+        if (success) {
+            navigate('/'); // Navigate only if login was successful
         }
     };
+
 
     return (
         <div className="container d-flex justify-content-center align-items-center" style={{minHeight: '100vh'}}>
             <div className="col-md-6 col-lg-4">
-                <div className="card p-4 border-0 text-white" style={{backgroundColor:'#0A1627'}}>
+                <div className="card p-4 border-0 text-white" style={{backgroundColor: '#0A1627'}}>
                     <h2 className="card-title text-center mb-4">Login</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">

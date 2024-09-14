@@ -22,7 +22,11 @@ const SignupPage = () => {
             await axios.post('http://localhost:8000/auth/signup/', { username, password });
             navigate('/login'); // Redirect to login page after signup
         } catch (error) {
-            setError('Failed to sign up');
+            if (error.response && error.response.data.error) {
+                setError(error.response.data.error); // Display error from the backend
+            } else {
+                setError('Failed to sign up');
+            }
         } finally {
             setIsLoading(false);
         }

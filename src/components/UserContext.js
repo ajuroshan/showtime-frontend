@@ -1,12 +1,14 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, {createContext, useState, useEffect} from 'react';
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 export const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
+
+export const UserProvider = ({children}) => {
     const [user, setUser] = useState(() => {
         const savedUser = localStorage.getItem('user');
         return savedUser ? JSON.parse(savedUser) : null;
@@ -20,18 +22,29 @@ export const UserProvider = ({ children }) => {
 
     const login = async (username, password) => {
         setIsLoading(true);
+        setError(null); // Clear previous errors
         try {
             const response = await axios.post('http://localhost:8000/auth/login/', { username, password });
             const userData = response.data.user;
             setUser(userData);
+
+            // Store user data in localStorage
             localStorage.setItem('user', JSON.stringify(userData));
-            setError(null);
+
+            setError(null); // Clear error if the login is successful
+            return true; // Return true on success
         } catch (error) {
-            setError('Login failed');
+            if (error.response && error.response.status === 400) {
+                setError(error.response.data.error); // Show server error message
+            } else {
+                setError('Something went wrong, please try again.');
+            }
+            return false; // Return false on failure
         } finally {
             setIsLoading(false);
         }
     };
+
 
     const logout = async () => {
         setIsLoading(true);
@@ -48,7 +61,7 @@ export const UserProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ user, isLoading, error, login, logout }}>
+        <UserContext.Provider value={{user, isLoading, error, login, logout}}>
             {children}
         </UserContext.Provider>
     );
