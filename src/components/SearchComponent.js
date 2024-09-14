@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col, ListGroup } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import './SearchComponent.css';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-
-const SearchComponent = () => {
+const SearchComponent = ({ onSearchResults }) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -22,7 +20,7 @@ const SearchComponent = () => {
             params: { search: searchTerm }
         })
             .then(response => {
-                setResults(response.data.results); // Adjust if your API structure is different
+                onSearchResults(response.data);  // Send results back to parent
                 setLoading(false);
             })
             .catch(error => {
@@ -48,8 +46,8 @@ const SearchComponent = () => {
                                     color: 'white',
                                     border: '1px solid #ffffff',
                                     borderRadius: '25rem',
-                                    flex: 1, // Allow input to take up available space
-                                    marginRight: '0.5rem' // Space between input and button
+                                    flex: 1,
+                                    marginRight: '0.5rem'
                                 }}
                             />
                             <Button
@@ -59,7 +57,7 @@ const SearchComponent = () => {
                                     borderRadius: '25rem',
                                     padding: '0.75rem',
                                     fontSize: '1rem',
-                                    flexShrink: 0 // Prevent button from shrinking
+                                    flexShrink: 0
                                 }}
                             >
                                 Search
@@ -67,15 +65,7 @@ const SearchComponent = () => {
                         </Form.Group>
                     </Form>
                     {loading && <p>Loading...</p>}
-                    {error && <p className="text-danger">{error}</p>}
-                    <ListGroup className="mt-4">
-                        {results.map((show) => (
-                            <ListGroup.Item key={show.id}>
-                                <strong>{show.title}</strong>
-                                <p>{show.description}</p>
-                            </ListGroup.Item>
-                        ))}
-                    </ListGroup>
+                    {error && <p className="text-danger p-2">{error}</p>}
                 </Col>
             </Row>
         </Container>

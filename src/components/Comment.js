@@ -1,19 +1,17 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
-
 const Comment = ({ comment }) => {
     return (
-        <Card className="text-white border-0" style={{backgroundColor: '#0A1627'}} >
-            <Card.Body>
-                <Card.Title className="mb-1">
+        <div className="text-white border-0 p-2" style={{backgroundColor: '#0A1627'}} >
+            <div>
+                <div className="mb-1">
                     <strong>{comment.user}</strong>
-                </Card.Title>
-                <Card.Text>
+                </div>
+                <p>
                     {comment.text}
-                </Card.Text>
-            </Card.Body>
-        <hr/>
-        </Card>
+                </p>
+            </div>
+            <hr className={"link-secondary"}/>
+        </div>
     );
 };
 

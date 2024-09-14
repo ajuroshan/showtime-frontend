@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -42,7 +42,7 @@ const SignupPage = () => {
 
         try {
             await axios.post('http://localhost:8000/auth/signup/',
-                { username, password },{
+                {username, password}, {
                     headers: {
                         'X-CSRFToken': csrftoken,
                     },
@@ -61,9 +61,9 @@ const SignupPage = () => {
     };
 
     return (
-        <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+        <div className="container d-flex justify-content-center align-items-center" style={{minHeight: '100vh'}}>
             <div className="col-md-6 col-lg-4">
-                <div className="card p-4 border-0 text-white" style={{ backgroundColor: '#0A1627' }}>
+                <div className="card p-4 border-0 text-white" style={{backgroundColor: '#0A1627'}}>
                     <h2 className="card-title text-center mb-4">Signup</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
@@ -75,6 +75,14 @@ const SignupPage = () => {
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
+                                style={{
+                                    backgroundColor: '#0A1627',
+                                    color: 'white',
+                                    border: '1px solid "#FAF9F6"',
+                                    borderRadius: '0.5rem',
+                                    flex: 1,
+                                    marginRight: '0.5rem'
+                                }}
                             />
                         </div>
                         <div className="mb-3">
@@ -86,6 +94,14 @@ const SignupPage = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
+                                style={{
+                                    backgroundColor: '#0A1627',
+                                    color: 'white',
+                                    border: '1px solid "#FAF9F6"',
+                                    borderRadius: '0.5rem',
+                                    flex: 1,
+                                    marginRight: '0.5rem'
+                                }}
                             />
                         </div>
                         <div className="mb-3">
@@ -94,16 +110,30 @@ const SignupPage = () => {
                                 type="password"
                                 id="confirmPassword"
                                 className="form-control"
+                                style={{
+                                    backgroundColor: '#0A1627',
+                                    color: 'white',
+                                    border: '1px solid "#FAF9F6"',
+                                    borderRadius: '0.5rem',
+                                    flex: 1,
+                                    marginRight: '0.5rem'
+                                }}
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary w-100" disabled={isLoading}>
+                        <button type="submit" className="btn btn-sm btn-outline-success w-100" disabled={isLoading}
+                                style={{
+                                    borderRadius: '0.5rem',
+                                    padding: '0.75rem',
+                                    fontSize: '1rem',
+                                    flexShrink: 0
+                                }}>
                             {isLoading ? 'Signing up...' : 'Signup'}
                         </button>
                         {error && (
-                            <p className="text-danger mt-2" aria-live="assertive">
+                            <p className="small text-danger mt-2" aria-live="assertive">
                                 {error}
                             </p>
                         )}

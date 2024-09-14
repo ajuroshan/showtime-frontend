@@ -1,16 +1,52 @@
+/* Container for episodes with scroll */
 .scroll-container {
     overflow-x: auto;
     white-space: nowrap;
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
 }
 
 .scrollable-row {
     display: flex;
     flex-wrap: nowrap;
-    gap: 10px;
+    gap: 1.5rem;
 }
 
 .scroll-item {
     flex: 0 0 auto;
-    min-width: 250px; /* Adjust as necessary */
+    min-width: 250px; /* Ensures the episode cards maintain a minimum size */
+}
+
+/* Episode card hover effect */
+.hovveerr:hover {
+    transform: scale(1.008); /* Slight zoom effect */
+    transition: transform 0.3s ease;
+}
+
+
+/* Scrollbar styling for WebKit browsers (Chrome, Safari, Edge) */
+.scroll-container::-webkit-scrollbar {
+    height: 10px; /* Adjust height for horizontal scrollbar */
+    background-color: #0A1627; /* Background color of the scrollbar */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #ffffff; /* Color of the scroll thumb */
+    border-radius: 10px; /* Round edges */
+    border: 2px solid #0A1627; /* Adds space around the thumb */
+}
+
+/* Hover effect for scrollbar thumb */
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: #ccc; /* Lighter color when hovered */
+}
+
+/* Firefox scrollbar styling */
+.scroll-container {
+    scrollbar-width: thin; /* Make the scrollbar thin */
+    scrollbar-color: #ffffff #0A1627; /* Thumb color and background */
+}
+
+/* Scrollbar track styling */
+.scroll-container::-webkit-scrollbar-track {
+    background-color: #0A1627; /* Background color of the scrollbar track */
 }

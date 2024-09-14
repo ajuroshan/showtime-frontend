@@ -6,13 +6,14 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import ShowDetails from "./components/ShowDetails";
 import Navbar from "./components/Navbar";
 import SearchComponent from "./components/SearchComponent";
-import UserContext, {UserProvider} from "./components/UserContext";
+import {UserProvider} from "./components/UserContext";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Footer from "./components/Footer";
 
 function App() {
     return (
-        <div style={{backgroundColor: '#0A1627', minHeight: '100vh', color: "white"}}>
+        <div style={{backgroundColor: '#0A1627', minHeight: '100vh', color: "#FAF9F6"}}>
             <UserProvider>
                 <Router>
                     <Navbar/>
@@ -23,6 +24,7 @@ function App() {
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signup" element={<Signup/>}/> 
                     </Routes>
+                    <Footer/>
                 </Router>
             </UserProvider>
         </div>

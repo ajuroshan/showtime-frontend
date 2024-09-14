@@ -4,18 +4,17 @@ import {useParams} from 'react-router-dom';
 import {Container, Card, Row, Col} from 'react-bootstrap';
 import './ShowDetails.css';
 import Comment from "./Comment";
-import CommentForm from "./CommentForm"; // For custom styles
+import CommentForm from "./CommentForm";
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
-
 const ShowDetails = () => {
-    const {id} = useParams();  // Get the show ID from the URL
+    const {id} = useParams(); // Get the ID from the URL
     const [show, setShow] = useState(null);
     const [comments, setComments] = useState([]);
-    const [edpisodeId, setEpisodeId] = useState(null);
+    const [episodeId, setEpisodeId] = useState(null);
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/shows/${id}/`)
@@ -50,7 +49,7 @@ const ShowDetails = () => {
 
     const handleCommentPosted = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/episodes/${edpisodeId}/`
+            const response = await axios.get(`http://localhost:8000/api/episodes/${episodeId}/`
                 , {
                     headers: {
                         'X-CSRFToken': csrftoken,
@@ -66,20 +65,21 @@ const ShowDetails = () => {
     return (
         <Container className="mt-4">
             {/* Show Poster and Description */}
-            <div className="d-flex justify-content-between align-items-start gap-5">
-                <img src={show.poster} alt={show.title} style={{height: '400px'}}/>
+            <div className="d-flex flex-column flex-md-row justify-content-between align-items-start gap-5">
+                <img src={show.poster} alt={show.title}
+                     style={{height: '400px', objectFit: 'cover', width: '100%', maxWidth: '300px'}}/>
                 <div>
                     <h1>{show.title}</h1>
                     <p>{show.description}</p>
-                    <h4>Cast</h4>
-                    <div className="d-flex align-items-start gap-2">
+                    <h4 className={"py-2"}>Cast</h4>
+                    <div className="d-flex flex-wrap align-items-start gap-3">
                         {show.cast.map(actor => (
-                            <div key={actor.id} className="mb-3">
+                            <div key={actor.id} className="text-center">
                                 {actor.image && (
                                     <img
                                         src={actor.image}
                                         alt={actor.name}
-                                        className={'mb-2'}
+                                        className="mb-2"
                                         style={{
                                             height: '100px',
                                             width: '100px',   // Ensures the image is square
@@ -88,33 +88,55 @@ const ShowDetails = () => {
                                         }}
                                     />
                                 )}
-                                <div className={'text-center'}>
-                                    <h6>{actor.name}</h6>
-                                    <p>Role: {actor.role}</p>
+                                <div>
+                                    <h6 className={"small"}>{actor.name}</h6>
+                                    <p className={"small"}>Role: {actor.role}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
-
-
                 </div>
             </div>
 
             {/* Scrollable Episode List */}
-            <h4>Episodes</h4>
+            <h4 className="mt-4">Episodes</h4>
             <div className="scroll-container">
-                <Row className=" scrollable-row">
+                <Row className="scrollable-row gap-4">
                     {show.episodes.map(episode => (
-                        <Col key={episode.id} xs={12} md={4} lg={3} className="scroll-item">
-                            <Card className="h-100" onClick={() => {
-                                setComments(episode.comments)
-                                setEpisodeId(episode.id)
-                            }}>
-                                <img src={episode.image} alt={episode.title}
-                                     style={{height: '150px', objectFit: "cover"}}/>
+                        <Col key={episode.id} xs={12} sm={6} md={4} lg={3} className="scroll-item">
+                            <Card
+                                className="h-100 text-white hovveerr"
+                                onClick={() => {
+                                    setComments(episode.comments);
+                                    setEpisodeId(episode.id);
+                                }}
+                                style={{cursor: 'pointer', backgroundColor: '#0A1627'}}
+                            >
+                                <img
+                                    src={episode.image}
+                                    alt={episode.title}
+                                    style={{height: '150px', objectFit: "cover"}}
+                                />
                                 <Card.Body>
-                                    <Card.Title>{episode.title}</Card.Title>
-                                    <Card.Text>{episode.description}</Card.Text>
+                                    <Card.Title
+                                        style={{
+                                            whiteSpace: 'normal',  // Allow text to wrap onto multiple lines
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis'
+                                        }}
+                                    >
+                                        {episode.title}
+                                    </Card.Title>
+                                    <Card.Text
+                                        className={"small"}
+                                        style={{
+                                            whiteSpace: 'normal',  // Allow text to wrap onto multiple lines
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis'
+                                        }}
+                                    >
+                                        {episode.description}
+                                    </Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -122,12 +144,12 @@ const ShowDetails = () => {
                 </Row>
             </div>
 
-            <h4>Comments</h4>
+
+            <h4 className="mt-4">Comments</h4>
             {comments.map(comment => (
                 <Comment key={comment.id} comment={comment}/>
             ))}
-            <CommentForm episodeId={edpisodeId} onCommentPosted={handleCommentPosted}/>
-
+            <CommentForm episodeId={episodeId} onCommentPosted={handleCommentPosted}/>
         </Container>
     );
 };

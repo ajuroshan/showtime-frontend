@@ -33,6 +33,14 @@ const LoginPage = () => {
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
+                                style={{
+                                    backgroundColor: '#0A1627',
+                                    color: 'white',
+                                    border: '1px solid "#FAF9F6"',
+                                    borderRadius: '0.5rem',
+                                    flex: 1,
+                                    marginRight: '0.5rem'
+                                }}
                             />
                         </div>
                         <div className="mb-3">
@@ -44,9 +52,24 @@ const LoginPage = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
+                                style={{
+                                    backgroundColor: '#0A1627',
+                                    color: 'white',
+                                    border: '1px solid "#FAF9F6"',
+                                    borderRadius: '0.5rem',
+                                    flex: 1,
+                                    marginRight: '0.5rem'
+                                }}
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary w-100" disabled={isLoading}>
+                        <button type="submit" className="btn btn-outline-success w-100" disabled={isLoading}
+                                style={{
+                                    borderRadius: '0.5rem',
+                                    padding: '0.75rem',
+                                    fontSize: '1rem',
+                                    flexShrink: 0
+                                }}
+                        >
                             {isLoading ? 'Logging in...' : 'Login'}
                         </button>
                         {error && (

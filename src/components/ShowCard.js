@@ -1,10 +1,13 @@
 import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
+import './ShowCard.css';  // Import the custom CSS file for hover effects
 
-function ShowCard({title, description: description, image, onClick}) {
+function ShowCard({title, description, image, onClick}) {
     return (
-
-        <Card onClick={onClick} className="h-100" style={{backgroundColor: '#0A1627'}}>
+        <Card
+            onClick={onClick}
+            className="h-100 card-hover border-0" // Add custom class for hover effect
+            style={{backgroundColor: '#0A1627'}}
+        >
             <Card.Img
                 variant="top"
                 src={image}
@@ -13,11 +16,10 @@ function ShowCard({title, description: description, image, onClick}) {
             />
             <Card.Body className="text-start text-white">
                 <Card.Title className="text-start">{title}</Card.Title>
-                <Card.Text>{description}</Card.Text>
+                <Card.Text className={"small"}>{description}</Card.Text>
             </Card.Body>
         </Card>
-    )
-        ;
+    );
 }
 
 export default ShowCard;

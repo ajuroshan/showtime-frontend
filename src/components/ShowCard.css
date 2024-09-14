@@ -1,0 +1,9 @@
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-10px); /* Lift the card upwards */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Intensify shadow */
+    cursor: pointer; /* Change mouse cursor to pointer */
+}
