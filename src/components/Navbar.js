@@ -21,7 +21,7 @@ function BasicExample() {
     return (
         <Navbar expand="lg" className={'mb-4'}>
             <Container>
-                <Navbar.Brand href="/">
+                <Navbar.Brand href="/showtime-frontend">
                     <img
                         src={logo}
                         alt="Logo"
