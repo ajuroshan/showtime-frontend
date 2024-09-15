@@ -15,14 +15,14 @@ function App() {
     return (
         <div style={{backgroundColor: '#0A1627', minHeight: '100vh', color: "#FAF9F6"}}>
             <UserProvider>
-                <Router>
+                <Router basename={process.env.PUBLIC_URL}>
                     <Navbar/>
                     <Routes>
                         <Route path="/" element={<HomePage/>}/>
                         <Route path="/shows/:id" element={<ShowDetails/>}/> {/* Show details page */}
                         <Route path="/shows/search" element={<SearchComponent/>}/>
                         <Route path="/login" element={<Login/>}/>
-                        <Route path="/signup" element={<Signup/>}/> 
+                        <Route path="/signup" element={<Signup/>}/>
                     </Routes>
                     <Footer/>
                 </Router>
