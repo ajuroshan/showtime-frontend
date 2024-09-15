@@ -7,6 +7,7 @@ import './SearchComponent.css';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
+axios.defaults.withXSRFToken = true
 
 const getCookie = (name) => {
     let cookieValue = null;
