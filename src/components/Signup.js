@@ -41,7 +41,7 @@ const SignupPage = () => {
         const csrftoken = getCookie('csrftoken');
 
         try {
-            await axios.post('http://localhost:8000/auth/signup/',
+            await axios.post('https://showtimeapi.ajuroshan.me/auth/signup/',
                 {username, password}, {
                     headers: {
                         'X-CSRFToken': csrftoken,

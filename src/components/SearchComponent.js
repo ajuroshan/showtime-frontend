@@ -16,14 +16,14 @@ const SearchComponent = ({ onSearchResults }) => {
         setLoading(true);
         setError(null);
 
-        axios.get(`http://localhost:8000/api/shows/search/`, {
+        axios.get(`https://showtimeapi.ajuroshan.me/api/shows/search/`, {
             params: { search: searchTerm }
         })
             .then(response => {
                 onSearchResults(response.data);  // Send results back to parent
                 setLoading(false);
             })
-            .catch(error => {
+            .catch(() => {
                 setError('An error occurred while fetching data.');
                 setLoading(false);
             });

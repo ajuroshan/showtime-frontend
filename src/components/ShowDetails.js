@@ -17,7 +17,7 @@ const ShowDetails = () => {
     const [episodeId, setEpisodeId] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/shows/${id}/`)
+        axios.get(`https://showtimeapi.ajuroshan.me/api/shows/${id}/`)
             .then(response => {
                     setShow(response.data)
                     if (response.data.episodes.length > 0) {
@@ -49,7 +49,7 @@ const ShowDetails = () => {
 
     const handleCommentPosted = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/episodes/${episodeId}/`
+            const response = await axios.get(`https://showtimeapi.ajuroshan.me/api/episodes/${episodeId}/`
                 , {
                     headers: {
                         'X-CSRFToken': csrftoken,

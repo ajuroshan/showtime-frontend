@@ -7,7 +7,7 @@ const EpisodeList = ({ show }) => {
     const [selectedEpisode, setSelectedEpisode] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/episodes/?show=${show.id}`)
+        axios.get(`https://showtimeapi.ajuroshan.me/api/episodes/?show=${show.id}`)
             .then(response => setEpisodes(response.data))
             .catch(error => console.log(error));
     }, [show]);

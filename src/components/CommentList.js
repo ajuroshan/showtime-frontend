@@ -6,14 +6,14 @@ const CommentList = ({ episode }) => {
     const [newComment, setNewComment] = useState('');
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/comments/?episode=${episode.id}`)
+        axios.get(`https://showtimeapi.ajuroshan.me/api/comments/?episode=${episode.id}`)
             .then(response => setComments(response.data))
             .catch(error => console.log(error));
     }, [episode]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/comments/', { text: newComment, episode: episode.id })
+        axios.post('https://showtimeapi.ajuroshan.me/api/comments/', { text: newComment, episode: episode.id })
             .then(response => {
                 setComments([...comments, response.data]);
                 setNewComment('');

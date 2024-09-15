@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import ShowList from "./ShowList";
 
 const HomePage = () => {

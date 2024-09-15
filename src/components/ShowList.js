@@ -10,7 +10,7 @@ const ShowList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/shows/')
+        axios.get('https://showtimeapi.ajuroshan.me/api/shows/')
             .then(response => {
                 setSearchResults(response.data);
             })

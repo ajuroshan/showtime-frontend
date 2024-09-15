@@ -44,7 +44,7 @@ const CommentForm = ({ episodeId, onCommentPosted }) => {
 
         try {
             await axios.post(
-                'http://localhost:8000/api/comments/',
+                'https://showtimeapi.ajuroshan.me/api/comments/',
                 {
                     episode: episodeId,
                     text: commentText,

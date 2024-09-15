@@ -41,7 +41,7 @@ export const UserProvider = ({children}) => {
         const csrftoken = getCookie('csrftoken');
 
         try {
-            const response = await axios.post('http://localhost:8000/auth/login/',
+            const response = await axios.post('https://showtimeapi.ajuroshan.me/auth/login/',
                 {username, password}, {
                     headers: {
                         'X-CSRFToken': csrftoken,
@@ -74,7 +74,7 @@ export const UserProvider = ({children}) => {
         const csrftoken = getCookie('csrftoken');
 
         try {
-            await axios.post('http://localhost:8000/auth/logout/', {}, {
+            await axios.post('https://showtimeapi.ajuroshan.me/auth/logout/', {}, {
                     headers: {
                         'X-CSRFToken': csrftoken,
                     }
