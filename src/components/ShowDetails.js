@@ -146,6 +146,7 @@ const ShowDetails = () => {
 
 
             <h4 className="mt-4">Comments</h4>
+            <p className="mt-2 small text-white">click on episodes to view its comments.</p>
             {comments.map(comment => (
                 <Comment key={comment.id} comment={comment}/>
             ))}
