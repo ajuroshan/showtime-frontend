@@ -41,8 +41,8 @@ function BasicExample() {
                         </div>
                     ) : (
                         <div className="d-flex justify-content-center align-items-center gap-3">
-                            <Link className="btn btn-sm btn-primary" to="/login">Login</Link>
-                            <Link className="btn btn-sm btn-success" to="/signup">Signup</Link>
+                            <Link className="btn btn-sm btn-outline-light" to="/login">Login</Link>
+                            <Link className="btn btn-sm btn-outline-success" to="/signup">Signup</Link>
                         </div>
                     )}
                 </Navbar.Collapse>
