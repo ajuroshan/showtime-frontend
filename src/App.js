@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from "./components/HomePage";
 
 import './App.css';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import ShowDetails from "./components/ShowDetails";
 import Navbar from "./components/Navbar";
 import SearchComponent from "./components/SearchComponent";
@@ -15,7 +15,7 @@ function App() {
     return (
         <div style={{backgroundColor: '#0A1627', minHeight: '100vh', color: "#FAF9F6"}}>
             <UserProvider>
-                <Router basename={process.env.PUBLIC_URL}>
+
                     <Navbar/>
                     <Routes>
                         <Route path="/" element={<HomePage/>}/>
@@ -25,7 +25,6 @@ function App() {
                         <Route path="/signup" element={<Signup/>}/>
                     </Routes>
                     <Footer/>
-                </Router>
             </UserProvider>
         </div>
 
